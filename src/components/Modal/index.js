@@ -117,19 +117,31 @@ export default function Modal(props) {
                     </p>
                     <div className="flex justify-center items-center">
                         <button
+                            data-cy="modal-delete-cancel-button"
                             className="flex items-center bg-slate-200 text-[#4A4A4A] text-lg font-semibold py-3 px-10 rounded-full leading-none"
                             onClick={setIsOpen}
                             >
                                 Batal
                         </button>
-                        <form action="" onSubmit={e => {
-                            e.preventDefault();
-                            (todoitem ? removeTodoItemAction(id) : removeActivityGroupAction(id));
-                        }}>
-                            <button type="submit" className="flex items-center bg-very-high text-lg text-white font-semibold py-3 px-10 ml-5 rounded-full leading-none" onClick={setIsOpen}>
-                                Hapus
-                            </button>
-                        </form>
+                        {todoitem ? (
+                            <form action="" onSubmit={e => {
+                                e.preventDefault();
+                                removeTodoItemAction(id);
+                            }}>
+                                <button data-cy="modal-delete-confirm-button" type="submit" className="flex items-center bg-very-high text-lg text-white font-semibold py-3 px-10 ml-5 rounded-full leading-none" onClick={setIsOpen}>
+                                    Hapus
+                                </button>
+                            </form>
+                        ) : (
+                            <form action="" onSubmit={e => {
+                                e.preventDefault();
+                                removeActivityGroupAction(id);
+                            }}>
+                                <button data-cy="activity-item-delete-button" type="submit" className="flex items-center bg-very-high text-lg text-white font-semibold py-3 px-10 ml-5 rounded-full leading-none" onClick={setIsOpen}>
+                                    Hapus
+                                </button>
+                            </form>
+                        )}
                     </div>
                 </REACTSTRAP.ModalBody>
             </REACTSTRAP.Modal>
@@ -147,12 +159,13 @@ export default function Modal(props) {
                     <REACTSTRAP.ModalBody className="px-[30px] py-6">
                         <div className="input-groups">
                             <label htmlFor="title" className="text-basic text-sm font-semibold mb-2.5">NAMA LIST ITEM</label>
-                            <input type="text" className="form-control text-basic placeholder:text-[#A4A4A4] placeholder:font-normal border-[#E5E5E5] rounded-lg p-3 shadow-none" placeholder="Tambahkan nama activity" value={data?.title} onChange={event => setData(prev => ({...prev, title: event.target.value}))} />
+                            <input data-cy="modal-add-name-input" type="text" className="form-control text-basic placeholder:text-[#A4A4A4] placeholder:font-normal border-[#E5E5E5] rounded-lg p-3 shadow-none" placeholder="Tambahkan nama activity" value={data?.title} onChange={event => setData(prev => ({...prev, title: event.target.value}))} />
                         </div>
                         {todoitem && (
                             <div className="input-groups my-4">
                                 <label htmlFor="title" className="text-basic text-sm font-semibold mb-2.5">PRIORITY</label>
                                 <Select
+                                    data-cy="modal-add-priority-dropdown"
                                     defaultValue={data?.priority}
                                     onChange={event => setData(prev => ({...prev, priority: event.value}))}
                                     options={options}
@@ -163,7 +176,7 @@ export default function Modal(props) {
                         )}
                     </REACTSTRAP.ModalBody>
                     <REACTSTRAP.ModalFooter className="px-10 py-3">
-                        <button type="submit" className="flex items-center bg-main text-lg text-white font-semibold py-3 px-10 rounded-full leading-none" onClick={setIsOpen}>
+                        <button data-cy="modal-add-save-button" type="submit" className="flex items-center bg-main text-lg text-white font-semibold py-3 px-10 rounded-full leading-none" onClick={setIsOpen}>
                             Simpan
                         </button>
                     </REACTSTRAP.ModalFooter>

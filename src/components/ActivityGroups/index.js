@@ -26,9 +26,7 @@ export default function ActivityGroups() {
     }, [dispatch]);
 
     useEffect(() => {
-        setTimeout(() => {
-            listActivityGroupsAction();
-        }, 1000);
+        listActivityGroupsAction();
     }, [listActivityGroupsAction, API.listActivityGroups()]);
 
     return isFetching ? (
@@ -51,9 +49,11 @@ export default function ActivityGroups() {
         <div className="row -ml-2.5">
             <COMPONENT.Modal id={id} label="activity" type="delete" isOpen={deleteModal} setIsOpen={() => setDeleteModal(!deleteModal)} />
             {activityGroups.map(activityList => (
-                <div key={activityList.id} className="col-lg-3 pb-4">
+                <div data-cy="activity-item" key={activityList.id} className="col-lg-3 pb-4">
                     <div className="min-h-[234px] flex flex-column justify-between border border-neutral-50 rounded-xl shadow-xl px-7 py-[24px]">
-                        <a href={`/detail/${activityList.id}`} className="text-basic hover:text-basic text-lg font-bold">{activityList.title}</a>
+                        <a data-cy="activity-item" href={`/detail/${activityList.id}`} className="text-basic hover:text-basic">
+                            <div data-cy="activity-title" className="text-lg font-bold">{activityList.title}</div>
+                        </a>
                         <div className="flex justify-between items-center">
                             <p className="text-sm text-second font-medium leading-none">{date.format(new Date(activityList.created_at), "D MMMM YYYY")}</p>
                             <button className="m-0 p-0" onClick={() => {
@@ -69,6 +69,7 @@ export default function ActivityGroups() {
         </div>
     ) : (
         <img
+            data-cy="activity-empty-state"
             src={ActivityEmptyState}
             alt="illustration"
             className="w-[60%] mx-auto mt-24"

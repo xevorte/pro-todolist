@@ -63,7 +63,7 @@ export default function TodoItems(props) {
             {todoItems.map(el => (
                 <div key={el.id} className="col-12 flex items-center justify-between px-6 py-4 mb-4 border border-slate-50 shadow-xl rounded-xl">
                     <div className="content flex items-center">
-                        <REACTSTRAP.Input type="checkbox" defaultChecked={el.is_active !== 1} className="w-[20px] h-[20px]" onClick={() => switchTodoItemAction(el.id, (el.is_active === 1 ? 0 : 1))} />
+                        <REACTSTRAP.Input data-cy="todo-item-checkbox" type="checkbox" defaultChecked={el.is_active !== 1} className="w-[20px] h-[20px]" onClick={() => switchTodoItemAction(el.id, (el.is_active === 1 ? 0 : 1))} />
                         <div className={clsx("block w-[10px] h-[10px] rounded-full mx-4 mt-0.5", {
                             "bg-very-high": el.priority === "very-high",
                             "bg-high": el.priority === "high",
@@ -81,7 +81,7 @@ export default function TodoItems(props) {
                             }} />
                         </button>
                     </div>
-                    <button className="p-0 m-0" onClick={() => {
+                    <button data-cy="todo-item-delete-button" className="p-0 m-0" onClick={() => {
                         setTodoId(el.id);
                         setDeleteModal(!deleteModal);
                     }}>

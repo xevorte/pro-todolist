@@ -65,7 +65,11 @@ export default function Header(props) {
                             <img src={SVG.IC_BACK} alt="icon" />
                         </button>
                     )}
-                    <input type="text" className="max-w-[80%] text-4xl text-basic font-bold mb-4 border-b-2 focus:outline-none disabled:bg-white disabled:border-transparent" value={title} disabled={disabled} onChange={event => setTitle(event.target.value)} />
+                    {props?.title ? (
+                        <input data-cy="todo-title" type="text" className="max-w-[80%] text-4xl text-basic font-bold mb-4 border-b-2 focus:outline-none disabled:bg-white disabled:border-transparent" value={title} disabled={disabled} onChange={event => setTitle(event.target.value)} />
+                    ) : (
+                        <h1 data-cy="header-title" className="text-4xl text-basic font-bold mb-4">Activity</h1>
+                    )}
                     {edit && (
                         <button
                             className="mb-4 p-0"
@@ -78,15 +82,29 @@ export default function Header(props) {
                         </button>
                     )}
                 </div>
-                <button
-                    className="flex items-center bg-main text-lg text-white font-semibold py-3.5 pl-6 pr-7 mb-4 rounded-full leading-none"
-                    onClick={() => {
-                        setAddModal(!addModal);
-                    }}
-                >
-                    <img src={SVG.IC_PLUS} alt="icon" className="me-2" />
-                    Tambah
-                </button>
+                {todoitem ? (
+                    <button
+                        data-cy="todo-add-button"
+                        className="flex items-center bg-main text-lg text-white font-semibold py-3.5 pl-6 pr-7 mb-4 rounded-full leading-none"
+                        onClick={() => {
+                            setAddModal(!addModal);
+                        }}
+                    >
+                        <img src={SVG.IC_PLUS} alt="icon" className="me-2" />
+                        Tambah
+                    </button>
+                ) : (
+                    <button
+                        data-cy="activity-add-button"
+                        className="flex items-center bg-main text-lg text-white font-semibold py-3.5 pl-6 pr-7 mb-4 rounded-full leading-none"
+                        onClick={() => {
+                            setAddModal(!addModal);
+                        }}
+                    >
+                        <img src={SVG.IC_PLUS} alt="icon" className="me-2" />
+                        Tambah
+                    </button>
+                )}
             </div>
         </>
     );

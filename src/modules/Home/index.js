@@ -5,7 +5,7 @@ export default function Home() {
         <>
             <COMPONENT.Alert />
             <div className="max-w-5xl mx-auto px-7 mb-24">
-                <COMPONENT.Header title="Activity" />
+                <COMPONENT.Header />
                 <COMPONENT.ActivityGroups />
             </div>
         </>
