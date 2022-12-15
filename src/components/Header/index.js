@@ -68,7 +68,7 @@ export default function Header(props) {
                     {props?.title ? (
                         <input data-cy="todo-title" type="text" className="max-w-[80%] text-4xl text-basic font-bold mb-4 border-b-2 focus:outline-none disabled:bg-white disabled:border-transparent" value={title} disabled={disabled} onChange={event => setTitle(event.target.value)} />
                     ) : (
-                        <h1 data-cy="header-title" className="text-4xl text-basic font-bold mb-4">Activity</h1>
+                        <h1 data-cy="header-title" className="text-4xl text-basic font-bold mb-4">Activities</h1>
                     )}
                     {edit && (
                         <button
